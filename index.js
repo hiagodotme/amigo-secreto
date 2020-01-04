@@ -80,6 +80,10 @@ app.post('/api/grupo/:code/ingressar', (req, res) => {
 app.get('/api/grupo/:group/finish/:user', (req, res) => {
     let group = getGroup(req.params.group);
 
+    if(group.participantes.length == 1) {
+        return res.send({ok: false})
+    }
+
     // sorteando...
     let sorteados = [];
     for(let i = 0; i < group.participantes.length; i++) {
