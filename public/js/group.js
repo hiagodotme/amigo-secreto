@@ -14,6 +14,10 @@ $(function () {
         return;
     }
 
+    $('#participar').click(function () {
+        $(this).attr('disabled', true);
+    })
+
     $("#participando").show()
 
     var isAdmin;
