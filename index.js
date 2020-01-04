@@ -10,6 +10,11 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static('public'));
 
+app.use("/*", function (req, res, next) {
+    res.setHeader('Cache-Control', 'no-store');
+    next();
+});
+
 var getGroup = function (code) {
     if(fs.existsSync(__dirname + '/database/' + code)) {
         return JSON.parse(fs.readFileSync(__dirname + '/database/' + code))
