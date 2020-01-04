@@ -4,7 +4,7 @@ Quick project on NodeJS, jQuery and Bootstrap to make the draw for secret friend
 
 ## Demo
 
-If you just want to use it, just go to http://secretfriend.hiago.me/
+If you just want to use it, just go to https://secretfriend.hiago.me/
 
 ## Developing
 
