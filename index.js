@@ -89,6 +89,7 @@ app.get('/api/grupo/:group/finish/:user', (req, res) => {
             amigo = Math.floor(Math.random() * group.participantes.length)
         }
 
+        sorteados.push(amigo);
         group.participantes[i].amigosecreto = amigo;
     }
 

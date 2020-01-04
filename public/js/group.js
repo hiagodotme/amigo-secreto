@@ -60,7 +60,6 @@ $(function () {
                 }
             },
             error: function (a,b,c) {
-                console.log(a,b,c)
                 $('#hasError').show();
                 setTimeout(reloadGroup, 2000);
             }
