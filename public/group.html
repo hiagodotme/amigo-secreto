@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html class="h-100" lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Aguarde</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="css/sticky-footer-navbar.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header>
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+            <h5 class="my-0 mr-md-auto font-weight-normal"><strong>Amigo</strong> Secreto</h5>
+            <nav class="my-2 my-md-0 mr-md-3">
+              
+            </nav>
+            <a class="btn btn-outline-primary" href="/index.html">Novo Grupo</a>
+          </div>
+    </header>
+
+    <main role="main" class="flex-shrink-0" id="ingressar"  style="display: none">
+        <div class="container">
+            <h1 class="mt-5">Cadastro de Participante</h1>
+            <br/>
+            <form action="" id="participanteForm" method="POST">
+                <label>Qual o seu nome? =)</label>
+                <input type="text" class="form-control" name="participante" placeholder="João" />
+                <br />
+                <button type="submit" class="btn btn-primary">Participar</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Começa o conteúdo da página -->
+    <main role="main" class="container flex-shrink-0" id="participando" style="display: none">
+        
+        <h1 class="mt-5" id="nomeGrupo">Criar Grupo</h1>
+
+        <strong>Participantes</strong>
+        <ul id="participantes">
+        </ul>
+
+        <div class="alert alert-warning" style="display: none;" id="aguardandosorteio">
+            Aguardando sorteio...
+        </div>
+        <div class="alert alert-primary" style="display: none;" id="seuamigo">
+            Aguardando sorteio...
+        </div>
+        <div class="alert alert-danger hide" id="hasError">
+            <strong>Ocorreu um erro =(</strong>
+        </div>
+
+        <form id="adminBar">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="" id="whatslink" class="btn btn-success" data-action="share/whatsapp/share">
+                        <i class='fab fa-whatsapp'></i> Convidar amigos
+                    </a>            
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-primary" type="button" id="finishAndSort"><i class='fas fa-check'></i> Finalizar e Sortear</button>
+                </div>
+            </div>
+        </form>
+
+    </main>
+
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <span class="text-muted">&copy; 2020 - <a href="https://www.hiago.me" target="_blank">Hiago Silva Souza</a>.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="js/group.js"></script>
+</body>
+
+</html>
