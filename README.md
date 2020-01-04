@@ -8,10 +8,10 @@ If you just want to use it, just go to http://secretfriend.hiago.me/
 
 ## Developing
 
-1. Clone esse repositório
-2. Instale as dependências utilizando `npm i`
-3. Execute o projeto `npm start`
-4. Acesse o site `http://localhost:8093`
+1. Clone this repository
+2. Install dependencies using `npm i`
+3. Run the project `npm run start:dev`
+4. Visit the site `http://localhost:8093`
 
 Author
 ----
