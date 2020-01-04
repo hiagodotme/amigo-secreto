@@ -15,7 +15,7 @@ If you just want to use it, just go to http://secretfriend.hiago.me/
 
 Author
 ----
-> [Hiago Silva Souza](https://www.hiago.me) <<hiasilva@gmail.com>>
+> [Hiago Silva Souza](https://www.hiago.me) <<hiasilva@gmail.com>> / https://hiago.me/
 
 License
 ----
