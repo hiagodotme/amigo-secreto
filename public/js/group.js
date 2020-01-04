@@ -55,6 +55,8 @@ $(function () {
 
                 if(!data.finalizado) {
                     setTimeout(reloadGroup, 2000);
+                } else {
+                    $('#adminBar').hide();
                 }
             },
             error: function (a,b,c) {
