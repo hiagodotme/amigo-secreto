@@ -84,9 +84,9 @@ app.get('/api/grupo/:group/finish/:user', (req, res) => {
     let sorteados = [];
     for(let i = 0; i < group.participantes.length; i++) {
         // amigo secreto
-        let amigo = Math.floor(Math.random() * group.participantes.length)
+        let amigo = Math.ceil(Math.random() * group.participantes.length)
         while(amigo == -1 || amigo == i || !sorteados.includes(amigo) || !group.participantes[amigo]) {
-            amigo = Math.floor(Math.random() * group.participantes.length)
+            amigo = Math.ceil(Math.random() * group.participantes.length)
         }
 
         sorteados.push(amigo);
