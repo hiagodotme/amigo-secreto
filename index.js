@@ -1,8 +1,8 @@
 const express = require("express"),
-        bodyParser = require('body-parser'),
-        uuid = require('uuid/v4'),
-        fs = require('fs'),
-        app = express();
+    bodyParser = require('body-parser'),
+    uuid = require('uuid/v4'),
+    fs = require('fs'),
+    app = express();
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -16,18 +16,18 @@ app.use("/*", function (req, res, next) {
 });
 
 var getGroup = function (code) {
-    if(fs.existsSync(__dirname + '/database/' + code)) {
+    if (fs.existsSync(__dirname + '/database/' + code)) {
         return JSON.parse(fs.readFileSync(__dirname + '/database/' + code))
     }
-    
+
     return false
 };
 
 app.get('/api/grupo/:code/:user', (req, res) => {
     let group = getGroup(req.params.code)
-    if(group) {
+    if (group) {
         group.participantes.forEach(participante => {
-            if(participante.uuid != req.params.user) {
+            if (participante.uuid != req.params.user) {
                 participante.amigosecreto = null
             }
         });
@@ -43,7 +43,7 @@ app.post('/api/grupo', (req, res) => {
     let groupCode = uuid()
 
     // enquanto existir um código igual ao gerado, eu gero outro
-    while(fs.existsSync(__dirname + '/database/' + groupCode)) {
+    while (fs.existsSync(__dirname + '/database/' + groupCode)) {
         groupCode = uuid()
     }
 
@@ -51,17 +51,19 @@ app.post('/api/grupo', (req, res) => {
         nome: req.body.nome,
         criado_em: new Date(),
         uuid: groupCode,
+        regras: req.body.regras,
         finalizado: false,
         participantes: [{
             uuid: userCode,
             is_admin: true,
             nome: req.body.participante,
+            restricao: req.body.restricao,
             alterado_em: new Date()
         }]
     };
     fs.writeFileSync(__dirname + '/database/' + groupCode, JSON.stringify(grupo))
 
-    return res.send('<script>window.location="/group.html?code=' + groupCode + '&user='+userCode+'";</script>');
+    return res.send('<script>window.location="/group.html?code=' + groupCode + '&user=' + userCode + '";</script>');
 })
 
 // ingressa em um grupo
@@ -73,28 +75,29 @@ app.post('/api/grupo/:code/ingressar', (req, res) => {
         uuid: userCode,
         is_admin: false,
         nome: req.body.participante,
+        restricao: req.body.restricao,
         alterado_em: new Date()
     });
 
     fs.writeFileSync(__dirname + '/database/' + req.params.code, JSON.stringify(group))
 
-    return res.send('<script>window.location="/group.html?code=' + req.params.code + '&user='+userCode+'";</script>');
+    return res.send('<script>window.location="/group.html?code=' + req.params.code + '&user=' + userCode + '";</script>');
 })
 
 // sorteando os nomes
 app.get('/api/grupo/:group/finish/:user', (req, res) => {
     let group = getGroup(req.params.group);
 
-    if(group.participantes.length == 1) {
-        return res.send({ok: false})
+    if (group.participantes.length == 1) {
+        return res.send({ ok: false })
     }
 
     // sorteando...
     let sorteados = [];
-    for(let i = 0; i < group.participantes.length; i++) {
+    for (let i = 0; i < group.participantes.length; i++) {
         // amigo secreto
         let amigo = Math.ceil(Math.random() * group.participantes.length) - 1
-        while(amigo == -1 || amigo == i || sorteados.includes(amigo) || !group.participantes[amigo]) {
+        while (amigo == -1 || amigo == i || sorteados.includes(amigo) || !group.participantes[amigo]) {
             amigo = Math.ceil(Math.random() * group.participantes.length) - 1
         }
 
@@ -104,10 +107,10 @@ app.get('/api/grupo/:group/finish/:user', (req, res) => {
 
     group.finalizado = true
     fs.writeFileSync(__dirname + '/database/' + req.params.group, JSON.stringify(group))
-    return res.send({ok: true});
+    return res.send({ ok: true });
 })
 
-if(!fs.existsSync(__dirname + '/database'))
+if (!fs.existsSync(__dirname + '/database'))
     fs.mkdirSync(__dirname + '/database');
 
 app.listen(8093, function () {
